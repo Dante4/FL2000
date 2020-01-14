@@ -1,11 +1,13 @@
-all:	fltest fltest_arm
+arm_prefix = /opt/hi3798/arm-hisiv200-linux/bin/arm-hisiv200-linux-gnueabi
+	
+all:	fltest 	
+	#ifdef __x86_64__    
+	fltest_arm  
+	#endif 
 
 fltest:	main.c
 	gcc main.c -o fltest
 
-fltest_arm:	main.c
-	#ifdef __x86_64__    
-	arm_prefix = /opt/hi3798/arm-hisiv200-linux/bin/arm-hisiv200-linux-gnueabi	
+fltest_arm:	main.c   	
 	$(arm_prefix)-gcc main.c -Xlinker -static -static-libgcc -o fltest_arm
-	$(arm_prefix)-strip fltest_arm 
-	#endif   
+	$(arm_prefix)-strip fltest_arm  
