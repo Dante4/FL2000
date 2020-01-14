@@ -596,7 +596,7 @@ fl2000_ioctl_test_alloc_surface(struct file *file, unsigned long arg)
 	alloc_info.buffer_size = len;
 	alloc_info.usr_addr = usr_addr;
 	alloc_info.phy_addr = (uint64_t) (start_pfn << PAGE_SHIFT);
-	copy_to_user((void*) arg, &alloc_info, sizeof(alloc_info));
+	ret = copy_to_user((void*) arg, &alloc_info, sizeof(alloc_info));
 
 	dbg_msg(TRACE_LEVEL_INFO, DBG_PNP,
 		"usr_addr(0x%lx)/phy_addr(0x%lx) returned",
